@@ -9,7 +9,7 @@
 To print digits of a number, I first called the function for `n / 10` and then printed `n % 10`.  
 This helped print the digits in the correct order.
 
-![Task 1 Screenshot](images/task/1.png)
+![Task 1 Screenshot](images/task%201.png)
 
 
 ### Task 2: 
