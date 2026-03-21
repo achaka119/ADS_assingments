@@ -81,6 +81,6 @@ The recursion stops when `b = 0`.
 ![Task 10 Screenshot](images/task%2010.png)
 
 
-![output codes 1 Screenshot](images/output_codes_1.png)
-![output codes 2 Screenshot](images/output_codes_2.png)
+![output codes 1 Screenshot](images/output%codes%201.png)
+![output codes 2 Screenshot](images/output%codes%202.png)
 
