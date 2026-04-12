@@ -14,7 +14,8 @@
 
 
 ### Task 3: 
-T
+![Task 3](screenshots/task%203.png)
+
 ### Task 4: 
 
 
