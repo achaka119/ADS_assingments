@@ -6,7 +6,9 @@
 #### Assignment 2
 
 ### Task 1: 
+![Task 1](screenshots/bankAccount%20java.png)
 
+![Task 1](screenshots/main%20java%20task%201.png)
 
 
 ### Task 2: 
