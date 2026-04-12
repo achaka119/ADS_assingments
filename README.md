@@ -10,7 +10,7 @@
 
 
 ### Task 2: 
-![Task 2](images/task2.png)
+![Task 2](images/task%202.png)
 
 
 ### Task 3: 
