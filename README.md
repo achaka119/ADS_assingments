@@ -17,9 +17,9 @@
 ![Task 3](images/task%203.png)
 
 ### Task 4: 
-
+![Task 4](images/task%204.png)
 
 ### Task 5:
-
+![Task 5](images/task%205.png)
 
 ### Task 6:
