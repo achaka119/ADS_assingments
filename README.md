@@ -10,6 +10,8 @@
 
 
 ### Task 2: 
+![Task 2](screenshots/task2.png)
+
 
 ### Task 3: 
 T
