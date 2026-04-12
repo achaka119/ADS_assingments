@@ -20,6 +20,6 @@
 ![Task 4](images/task%204.png)
 
 ### Task 5:
-![Task 5](images/task%205.png)
+![Task 5](images/task5.png)
 
 ### Task 6:
