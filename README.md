@@ -23,3 +23,4 @@
 ![Task 5](images/task5.png)
 
 ### Task 6:
+![Task 6](screenshots/array.png)
