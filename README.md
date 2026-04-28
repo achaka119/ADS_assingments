@@ -3,79 +3,109 @@
 
 ### Group: IT-2501
 
-#### Assignment 2
+#### Assignment 3
 
-### Task 1: 
-![Task 1](images/bankAccount%20java.png)
+# Sorting and Searching Algorithm Analysis System
+## 1. Project Overview
+This project compares the performance of sorting and searching algorithms in Java.
 
-![Task 1](images/main%20java%20task%201.png)
+I selected these algorithms:
+- Insertion Sort as the basic sorting algorithm
+- Heap Sort as the advanced sorting algorithm
+- Binary Search as the searching algorithm
+The purpose of this experiment is to measure execution time using `System.nanoTime()` and 
+compare how the algorithms perform on different array sizes and input types.
 
-In Task 1, I created a `BankAccount` class with account number, username, and balance.  
-Then I used `LinkedList<BankAccount>` to store bank accounts.
-The program can:
-- add accounts
-- display accounts
-- search account by username
-This task helped me learn how to use LinkedList in Java.
+The program tests:
+- Small arrays with 10 elements
+- Medium arrays with 100 elements
+- Large arrays with 1000 elements
+- Random arrays
+- Sorted arrays
 
-### Task 2: 
-![Task 2](images/task%202.png)
-I added two new operations: **deposit** and **withdraw**.
-The program first searches for a bank account by username.  
-If the account is found, the user can add money to the balance or withdraw money from it.
+## 2. Algorithm Descriptions
 
-For deposit:
-- the entered amount is added to the current balance
-For withdraw:
-- the entered amount is subtracted from the balance
-- before withdrawing, the program checks if the balance is enough
+### Insertion Sort
 
-If there is not enough money, the program shows **"Insufficient balance"**.
-This task helped me understand how to update object data inside a LinkedList in Java.
+Insertion Sort is a simple sorting algorithm. 
+It builds the sorted part of the array one element at a time. 
+Each new element is compared with the previous elements and placed in the correct position.
 
-### Task 3: 
-![Task 3](images/task%203.png)
-In Task 3, I added `Stack<String>` to store transaction history.
-The program can:
-- save a new transaction using `push()`
-- show the last transaction using `peek()`
-- remove the last transaction using `pop()`
+Time complexity:
+- Best case: O(n), when the array is already sorted
+- Average case: O(n²)
+- Worst case: O(n²)
 
-I used stack because it works with **LIFO (Last In, First Out)**.  
-This means the last transaction added is the first one removed.
+### Heap Sort
 
-### Task 4: 
-![Task 4](images/task%204.png)
-In Task 4, I added `Queue<String>` to manage bill payments.
+Heap Sort is an advanced sorting algorithm. It first builds a max heap from the array. 
+Then it repeatedly moves the largest element to the end of the array and fixes the heap structure.
 
-The program can:
-- add a bill to the queue
-- process the next bill
-- display all bills in the queue
+Time complexity:
+- Best case: O(n log n)
+- Average case: O(n log n)
+- Worst case: O(n log n)
 
-I used queue because it works with **FIFO (First In, First Out)**.  
-This means the first bill added to the queue is the first bill processed.
+### Binary Search
 
-### Task 5:
-![Task 5](images/task5.png)
-In Task 5, I used `Queue<BankAccount>` to store account opening requests.
+Binary Search is a searching algorithm that works only on sorted arrays. 
+It checks the middle element of the array. If the target is smaller, it searches the left half. 
+If the target is larger, it searches the right half.
 
-When a user wants to create a new bank account, the request is first added to the queue.  
-After that, the admin can process the request and move it to the main `LinkedList<BankAccount>`.
-I used queue because it follows **First In, First Out**.  
-This means the first account request added is the first request processed.
+Time complexity:
+- Best case: O(1)
+- Average case: O(log n)
+- Worst case: O(log n)
 
-### Task 6:
-![Task 6](images/array.png)
-In Task 6, I used an array to store predefined bank accounts.
-I created `BankAccount[]` with a fixed size and stored 3 bank accounts inside it.
+## 4. Analysis Questions
+### Which sorting algorithm performed faster? Why?
+Heap Sort performed faster than Insertion Sort for larger arrays.
+This is because Heap Sort has O(n log n) time complexity,
+while Insertion Sort has O(n²) time complexity in the average and worst cases.
 
-The program can:
-- store bank accounts in an array
-- display all array accounts
+### How does performance change with input size?
+As the input size increased, both algorithms took more time.
+However, Insertion Sort became much slower when the array size increased because it uses nested comparisons and shifting.
+Heap Sort increased more slowly because it has better time complexity.
 
-I used an array to show a **physical data structure**.  
-Unlike LinkedList, an array has a fixed size and uses indexes to store elements.
+### How does sorted vs unsorted data affect performance?
 
+Insertion Sort performs much better on sorted arrays because it does not need to move many elements.
+Its best case is O(n).
+Heap Sort is less affected by whether the array is sorted or random
+because it always builds a heap and extracts elements.
 
+### Do the results match the expected Big-O complexity?
 
+Yes, the results mostly match the expected Big-O complexity.
+Insertion Sort became slower for larger random arrays, which matches O(n²). 
+Heap Sort performed better for large arrays, which matches O(n log n).
+
+### Which searching algorithm is more efficient? Why?
+
+Binary Search is very efficient because it divides the search area in half each time. 
+Its time complexity is O(log n), which is faster than Linear Search’s O(n).
+
+### Why does Binary Search require a sorted array?
+
+Binary Search requires a sorted array because it uses the middle value to decide whether to search the left half or the right half. 
+If the array is not sorted, the algorithm cannot know which side contains the target.
+
+### Screenshots
+
+### Program Output
+![Program Output](docs/screenshots/output1.png)
+
+### Second Test Run
+![Second Test Run](docs/screenshots/output2.png)
+
+## 6. Reflection
+
+In this assignment, I learned how different algorithms can have different performance depending on the input size and input type. 
+I saw that Insertion Sort can work well for small or already sorted arrays, but it becomes slower for large random arrays. 
+Heap Sort was more efficient for large arrays because its time complexity is O(n log n).
+
+I also learned that theoretical Big-O complexity and real execution time are related, 
+but the exact time can change depending on the computer, Java runtime, and random data. 
+One challenge I faced was making sure Binary Search was used only on a sorted array, 
+because it cannot work correctly on unsorted data.
