@@ -94,10 +94,10 @@ If the array is not sorted, the algorithm cannot know which side contains the ta
 ### Screenshots
 
 ### Program Output
-![Program Output](docs/images/output1.png)
+![Program Output](images/output1.png)
 
 ### Second Test Run
-![Second Test Run](docs/images/output2.png)
+![Second Test Run](images/output2.png)
 
 ## 6. Reflection
 
