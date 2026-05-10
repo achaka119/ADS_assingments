@@ -181,10 +181,10 @@ E is the number of edges
 | 30 vertices | 123750        | 171125        |
 | 100 vertices | 163250        | 76250         |
 
-![Graph Structure](docs/images/output21.png)
+![Graph Structure](images/output21.png)
 
 
-![BFS Output and DFS Output](docs/images/output22.png)
+![BFS Output and DFS Output](images/output22.png)
 
 
 # Analysis
