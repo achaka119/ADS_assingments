@@ -17,7 +17,7 @@ public class Graph {
         Vertex destination = findVertex(to);
         if (source != null && destination != null) {
             edges.add(new Edge(source, destination));
-            edges.add(new Edge(destination, source)); // undirected graph
+            edges.add(new Edge(destination, source));
         }
     }
     private Vertex findVertex(int id) {
