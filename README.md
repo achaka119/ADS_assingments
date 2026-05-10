@@ -177,9 +177,9 @@ E is the number of edges
 
 | Graph Size | BFS Time (ns) | DFS Time (ns) |
 |---|---------------|---------------|
-| 10 vertices | 776625        | 16208         |
-| 30 vertices | 123750        | 171125        |
-| 100 vertices | 163250        | 76250         |
+| 10 vertices | 504417        | 75042         |
+| 30 vertices | 364417        | 402000        |
+| 100 vertices | 3107083       | 3281375       |
 
 ![Graph Structure](images/output21.png)
 

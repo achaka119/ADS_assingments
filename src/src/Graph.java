@@ -1,34 +1,40 @@
 import java.util.*;
 
 public class Graph {
-    private Map<Integer, List<Integer>> adjacencyList;
+
+    private List<Vertex> vertices;
+    private List<Edge> edges;
 
     public Graph() {
-        adjacencyList = new HashMap<>();
+        vertices = new ArrayList<>();
+        edges = new ArrayList<>();
     }
     public void addVertex(Vertex v) {
-        adjacencyList.putIfAbsent(v.getId(), new ArrayList<>());
+        vertices.add(v);
     }
-
     public void addEdge(int from, int to) {
-        adjacencyList.putIfAbsent(from, new ArrayList<>());
-        adjacencyList.putIfAbsent(to, new ArrayList<>());
-
-        adjacencyList.get(from).add(to);
-        adjacencyList.get(to).add(from);
-    }
-
-    public void printGraph() {
-        System.out.println("Graph adjacency list:");
-        for (int vertex : adjacencyList.keySet()) {
-            System.out.print(vertex + " -> ");
-            for (int neighbor : adjacencyList.get(vertex)) {
-                System.out.print(neighbor + " ");
-            }
-            System.out.println();
+        Vertex source = findVertex(from);
+        Vertex destination = findVertex(to);
+        if (source != null && destination != null) {
+            edges.add(new Edge(source, destination));
+            edges.add(new Edge(destination, source)); // undirected graph
         }
     }
+    private Vertex findVertex(int id) {
+        for (Vertex v : vertices) {
+            if (v.getId() == id) {
+                return v;
+            }
+        }
+        return null;
+    }
+    public void printGraph() {
+        System.out.println("Graph edges:");
 
+        for (Edge edge : edges) {
+            System.out.println(edge);
+        }
+    }
     public List<Integer> bfs(int start) {
         List<Integer> order = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();
@@ -36,14 +42,16 @@ public class Graph {
 
         visited.add(start);
         queue.add(start);
-
         while (!queue.isEmpty()) {
             int current = queue.poll();
             order.add(current);
-            for (int neighbor : adjacencyList.get(current)) {
-                if (!visited.contains(neighbor)) {
-                    visited.add(neighbor);
-                    queue.add(neighbor);
+            for (Edge edge : edges) {
+                if (edge.getSource().getId() == current) {
+                    int neighbor = edge.getDestination().getId();
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                        queue.add(neighbor);
+                    }
                 }
             }
         }
@@ -54,18 +62,23 @@ public class Graph {
         List<Integer> order = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();
         dfsHelper(start, visited, order);
+
         return order;
     }
+
     private void dfsHelper(int current, Set<Integer> visited, List<Integer> order) {
         visited.add(current);
         order.add(current);
-        for (int neighbor : adjacencyList.get(current)) {
-            if (!visited.contains(neighbor)) {
-                dfsHelper(neighbor, visited, order);
+        for (Edge edge : edges) {
+            if (edge.getSource().getId() == current) {
+                int neighbor = edge.getDestination().getId();
+                if (!visited.contains(neighbor)) {
+                    dfsHelper(neighbor, visited, order);
+                }
             }
         }
     }
     public int getNumberOfVertices() {
-        return adjacencyList.size();
+        return vertices.size();
     }
 }
