@@ -1,79 +1,62 @@
-import java.util.Arrays;
+import java.util.List;
 
 public class Experiment {
-    private Sorter sorter;
-    private Searcher searcher;
 
-    public Experiment(Sorter sorter, Searcher searcher) {
-        this.sorter = sorter;
-        this.searcher = searcher;
-    }
+    public void runTraversals(Graph graph, int startVertex, boolean printTraversal) {
+        System.out.println("-----------------------------------");
+        System.out.println("Graph size: " + graph.getNumberOfVertices() + " vertices");
 
-    public long measureSortTime(int[] arr, String type) {
-        long startTime = System.nanoTime();
+        long bfsStart = System.nanoTime();
+        List<Integer> bfsOrder = graph.bfs(startVertex);
+        long bfsEnd = System.nanoTime();
+        long bfsTime = bfsEnd - bfsStart;
 
-        if (type.equalsIgnoreCase("basic")) {
-            sorter.basicSort(arr);
-        } else if (type.equalsIgnoreCase("advanced")) {
-            sorter.advancedSort(arr);
-        } else {
-            System.out.println("Invalid sorting type. Use 'basic' or 'advanced'.");
+        long dfsStart = System.nanoTime();
+        List<Integer> dfsOrder = graph.dfs(startVertex);
+        long dfsEnd = System.nanoTime();
+        long dfsTime = dfsEnd - dfsStart;
+
+        if (printTraversal) {
+            System.out.println("BFS Traversal Order:");
+            System.out.println(bfsOrder);
+            System.out.println("DFS Traversal Order:");
+            System.out.println(dfsOrder);
         }
-        long endTime = System.nanoTime();
-
-        return endTime - startTime;
+        System.out.println("BFS execution time: " + bfsTime + " ns");
+        System.out.println("DFS execution time: " + dfsTime + " ns");
     }
 
-    public long measureSearchTime(int[] arr, int target) {
-        long startTime = System.nanoTime();
-        int result = searcher.search(arr, target);
-        long endTime = System.nanoTime();
-        if (result != -1) {
-            System.out.println("Target " + target + " found at index: " + result);
-        } else {
-            System.out.println("Target " + target + " not found.");
+    public void runMultipleTests() {
+        Graph smallGraph = createGraph(10);
+        Graph mediumGraph = createGraph(30);
+        Graph largeGraph = createGraph(100);
+        System.out.println("SMALL GRAPH STRUCTURE");
+        smallGraph.printGraph();
+
+        runTraversals(smallGraph, 0, true);
+        runTraversals(mediumGraph, 0, false);
+        runTraversals(largeGraph, 0, false);
+    }
+
+    private Graph createGraph(int size) {
+        Graph graph = new Graph();
+
+        for (int i = 0; i < size; i++) {
+            graph.addVertex(new Vertex(i));
         }
-
-        return endTime - startTime;
-    }
-
-    public void runAllExperiments() {
-        int[] sizes = {10, 100, 1000};
-
-        System.out.println("====================================");
-        System.out.println("Sorting and Searching Experiments");
-        System.out.println("Algorithms:");
-        System.out.println("Basic Sort: Insertion Sort");
-        System.out.println("Advanced Sort: Heap Sort");
-        System.out.println("Search: Binary Search");
-        System.out.println("====================================");
-
-        for (int size : sizes) {
-            System.out.println("\nArray Size: " + size);
-            int[] randomArray = sorter.generateRandomArray(size);
-            int[] sortedArray = Arrays.copyOf(randomArray, randomArray.length);
-            Arrays.sort(sortedArray);
-
-            runExperimentForArray("Random Array", randomArray);
-            runExperimentForArray("Sorted Array", sortedArray);
+        for (int i = 0; i < size - 1; i++) {
+            graph.addEdge(i, i + 1);
         }
+        for (int i = 0; i < size - 2; i += 2) {
+            graph.addEdge(i, i + 2);
+        }
+        return graph;
     }
 
-    private void runExperimentForArray(String arrayType, int[] originalArray) {
-        System.out.println("\nInput Type: " + arrayType);
-
-        int[] arrayForInsertionSort = Arrays.copyOf(originalArray, originalArray.length);
-        int[] arrayForHeapSort = Arrays.copyOf(originalArray, originalArray.length);
-        int[] arrayForBinarySearch = Arrays.copyOf(originalArray, originalArray.length);
-
-        long insertionSortTime = measureSortTime(arrayForInsertionSort, "basic");
-        long heapSortTime = measureSortTime(arrayForHeapSort, "advanced");
-        Arrays.sort(arrayForBinarySearch);
-        int target = arrayForBinarySearch[arrayForBinarySearch.length / 2];
-        long binarySearchTime = measureSearchTime(arrayForBinarySearch, target);
-
-        System.out.println("Insertion Sort Time: " + insertionSortTime + " ns");
-        System.out.println("Heap Sort Time: " + heapSortTime + " ns");
-        System.out.println("Binary Search Time: " + binarySearchTime + " ns");
+    public void printResults() {
+        System.out.println("-----------------------------------");
+        System.out.println("Experiment completed.");
+        System.out.println("BFS and DFS were tested on graphs with 10, 30, and 100 vertices.");
+        System.out.println("Both algorithms have time complexity O(V + E).");
     }
 }
