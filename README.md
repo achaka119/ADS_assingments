@@ -3,109 +3,234 @@
 
 ### Group: IT-2501
 
-#### Assignment 3
+#### Assignment 4
 
-# Sorting and Searching Algorithm Analysis System
-## 1. Project Overview
-This project compares the performance of sorting and searching algorithms in Java.
+# Assignment 4: Graph Traversal and Representation System
 
-I selected these algorithms:
-- Insertion Sort as the basic sorting algorithm
-- Heap Sort as the advanced sorting algorithm
-- Binary Search as the searching algorithm
-The purpose of this experiment is to measure execution time using `System.nanoTime()` and 
-compare how the algorithms perform on different array sizes and input types.
+## Project Overview
 
-The program tests:
-- Small arrays with 10 elements
-- Medium arrays with 100 elements
-- Large arrays with 1000 elements
-- Random arrays
-- Sorted arrays
+This project is a Java program that represents a graph using an adjacency list and performs two graph traversal algorithms:
 
-## 2. Algorithm Descriptions
+- Breadth-First Search (BFS)
+- Depth-First Search (DFS)
 
-### Insertion Sort
+The purpose of this assignment is to understand graph structures, graph representation, traversal algorithms, and performance analysis.
+A graph is a data structure made of vertices and edges.
 
-Insertion Sort is a simple sorting algorithm. 
-It builds the sorted part of the array one element at a time. 
-Each new element is compared with the previous elements and placed in the correct position.
+- A vertex is a node in the graph.
+- An edge is a connection between two vertices.
+- A graph is a collection of vertices and edges.
 
-Time complexity:
-- Best case: O(n), when the array is already sorted
-- Average case: O(n²)
-- Worst case: O(n²)
+Example graph:
 
-### Heap Sort
+```text
+0 ----- 1
+|       |
+2 ----- 3
+```
 
-Heap Sort is an advanced sorting algorithm. It first builds a max heap from the array. 
-Then it repeatedly moves the largest element to the end of the array and fixes the heap structure.
+## Vertex Class
 
-Time complexity:
-- Best case: O(n log n)
-- Average case: O(n log n)
-- Worst case: O(n log n)
+The Vertex class represents one node in the graph.
+Each vertex has a unique ID.
 
-### Binary Search
+Main methods:
 
-Binary Search is a searching algorithm that works only on sorted arrays. 
-It checks the middle element of the array. If the target is smaller, it searches the left half. 
-If the target is larger, it searches the right half.
+```text
+Vertex(int id)
+getId()
+toString()
+```
 
-Time complexity:
-- Best case: O(1)
-- Average case: O(log n)
-- Worst case: O(log n)
+The getId() method returns the ID of the vertex.
+The toString() method returns a readable text representation of the vertex.
 
-## 4. Analysis Questions
-### Which sorting algorithm performed faster? Why?
-Heap Sort performed faster than Insertion Sort for larger arrays.
-This is because Heap Sort has O(n log n) time complexity,
-while Insertion Sort has O(n²) time complexity in the average and worst cases.
+## Edge Class
 
-### How does performance change with input size?
-As the input size increased, both algorithms took more time.
-However, Insertion Sort became much slower when the array size increased because it uses nested comparisons and shifting.
-Heap Sort increased more slowly because it has better time complexity.
+The Edge class represents a connection between two vertices.
 
-### How does sorted vs unsorted data affect performance?
+It stores:
 
-Insertion Sort performs much better on sorted arrays because it does not need to move many elements.
-Its best case is O(n).
-Heap Sort is less affected by whether the array is sorted or random
-because it always builds a heap and extracts elements.
+1) source vertex
+2) destination vertex
 
-### Do the results match the expected Big-O complexity?
+Main methods:
 
-Yes, the results mostly match the expected Big-O complexity.
-Insertion Sort became slower for larger random arrays, which matches O(n²). 
-Heap Sort performed better for large arrays, which matches O(n log n).
+````text
+Edge(Vertex source, Vertex destination)
+getSource()
+getDestination()
+toString()
+````
 
-### Which searching algorithm is more efficient? Why?
+The getSource() method returns the starting vertex.
+The getDestination() method returns the ending vertex.
 
-Binary Search is very efficient because it divides the search area in half each time. 
-Its time complexity is O(log n), which is faster than Linear Search’s O(n).
+## Graph Class
 
-### Why does Binary Search require a sorted array?
+The Graph class represents the full graph structure.
+It uses an adjacency list to store the graph.
 
-Binary Search requires a sorted array because it uses the middle value to decide whether to search the left half or the right half. 
-If the array is not sorted, the algorithm cannot know which side contains the target.
+Example:
 
-### Screenshots
+0 -> 1 2
 
-### Program Output
-![Program Output](docs/screenshots/output1.png)
+1 -> 0 3
 
-### Second Test Run
-![Second Test Run](docs/screenshots/output2.png)
+2 -> 0
 
-## 6. Reflection
+3 -> 1
 
-In this assignment, I learned how different algorithms can have different performance depending on the input size and input type. 
-I saw that Insertion Sort can work well for small or already sorted arrays, but it becomes slower for large random arrays. 
-Heap Sort was more efficient for large arrays because its time complexity is O(n log n).
+This means:
+Vertex 0 is connected to vertices 1 and 2
 
-I also learned that theoretical Big-O complexity and real execution time are related, 
-but the exact time can change depending on the computer, Java runtime, and random data. 
-One challenge I faced was making sure Binary Search was used only on a sorted array, 
-because it cannot work correctly on unsorted data.
+Vertex 1 is connected to vertices 0 and 3
+
+Vertex 2 is connected to vertex 0
+
+Vertex 3 is connected to vertex 1
+
+Main methods:
+
+```text
+addVertex(Vertex v)
+addEdge(int from, int to)
+printGraph()
+bfs(int start)
+dfs(int start)
+```
+
+The addVertex() method adds a new vertex to the graph.
+The addEdge() method adds a connection between two vertices.
+The printGraph() method prints the graph structure.
+The bfs() method performs Breadth-First Search.
+The dfs() method performs Depth-First Search.
+
+# Algorithm Descriptions
+### Breadth-First Search, BFS
+
+Breadth-First Search is a graph traversal algorithm that visits vertices level by level.
+BFS starts from one vertex, visits all of its direct neighbors first, then visits the neighbors of those neighbors.
+BFS uses a queue.
+
+A queue follows the First In, First Out rule.
+This means the first vertex added to the queue will be processed first.
+
+BFS Step-by-Step Explanation:
+
+Start from the selected vertex.
+Mark the starting vertex as visited.
+Add the starting vertex to the queue.
+Remove the first vertex from the queue.
+Visit all unvisited neighbors of that vertex.
+Add those neighbors to the queue.
+Repeat until the queue is empty.
+
+BFS is useful for:
+
+finding the shortest path in an unweighted graph,
+exploring a graph level by level,
+finding the closest connection,
+checking if a graph is connected,
+social network connection search.
+
+The time complexity of BFS is:
+
+O(V + E)
+
+Where:
+V is the number of vertices,
+E is the number of edges
+
+BFS visits each vertex once and checks each edge once.
+
+### Depth-First Search, DFS
+
+DFS goes as deep as possible before going back.
+It starts from one vertex, visits one neighbor, continues deeper, 
+and then backtracks when there are no more unvisited neighbors.
+DFS can be implemented using recursion or a stack.
+
+DFS Steps:
+
+Start from a vertex.
+Mark it as visited.
+Visit one unvisited neighbor.
+Continue going deeper.
+If there are no unvisited neighbors, go back.
+Repeat until all reachable vertices are visited.
+
+DFS is useful for:
+
+path finding,
+cycle detection,
+connected components,
+exploring all possible paths.
+
+DFS Complexity:
+O(V + E)
+
+Where:
+V is the number of vertices, 
+E is the number of edges
+
+
+| Graph Size | BFS Time (ns) | DFS Time (ns) |
+|---|---------------|---------------|
+| 10 vertices | 776625        | 16208         |
+| 30 vertices | 123750        | 171125        |
+| 100 vertices | 163250        | 76250         |
+
+![Graph Structure](docs/images/output21.png)
+
+
+![BFS Output and DFS Output](docs/images/output22.png)
+
+
+# Analysis
+### How does graph size affect BFS and DFS performance?
+
+When the graph size increases, the execution time usually increases too.
+This is because both BFS and DFS need to visit more vertices and edges.
+The graph with 100 vertices takes more time than the graph with 10 vertices.
+
+### Which traversal is faster?
+
+In my experiment, DFS was slightly faster than BFS.
+However, the difference was small.
+Both algorithms have similar performance because both have the same time complexity: O(V + E).
+
+### Do the results match O(V + E)?
+
+Yes, the results match the expected complexity.
+BFS and DFS both visit each vertex and each edge once.
+Therefore, as the number of vertices and edges increases, the execution time also increases.
+
+### How does graph structure affect traversal order?
+
+Graph structure affects the order of traversal.
+BFS visits nearby vertices first.
+DFS goes deep into one path before returning to other vertices.
+The traversal order also depends on the order of neighbors inside the adjacency list.
+
+### When is BFS preferred over DFS?
+
+BFS is preferred when we need to find the shortest path in an unweighted graph.
+It is also useful when we want to explore nodes level by level.
+
+### What are the limitations of DFS?
+
+DFS does not always find the shortest path.
+DFS can also go very deep in large graphs.
+If recursion is used, it may cause a stack overflow.
+
+## Reflection
+
+In this project, I learned how to represent a graph using an adjacency list in Java. 
+I also learned how vertices and edges are used to build a graph structure.
+I learned that BFS and DFS are both important graph traversal algorithms. 
+BFS visits vertices level by level and is useful for finding the shortest path in an unweighted graph. 
+DFS goes deep into one path before backtracking and is useful for exploring paths and detecting cycles.
+One challenge was understanding how the visited set works. 
+It is important because it prevents the program from visiting the same vertex many times.
+
